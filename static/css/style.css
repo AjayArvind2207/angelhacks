@@ -776,3 +776,35 @@ h2.center {
         font-size: 0.9em;
     }
 }
+
+.login_container {
+    margin-top: 100px;
+    border-radius: 20px;
+    border: 1px solid #000000;
+    padding: 20px;
+    background-color: #f3f0f6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 300px; /* Set a minimum width to prevent content from becoming too compressed */
+    max-width: 800px;
+}
+.email_input {
+    margin-top: 20px;
+    border-radius: 5px;
+    border-style: solid;
+    height: 40px;
+}
+.password_input {
+    margin-top: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    height: 40px;
+}
+.submit_input {
+    margin-top: 20px;
+    border-radius: 5px;
+    border-style: solid;
+    background-color: #4b208c;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 15px;
+}
