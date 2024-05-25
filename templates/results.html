@@ -78,17 +78,18 @@
                                         >
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/about">
+                                        <a class="nav-link" href="/about/">
                                             About</a
                                         >
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/service">
+                                        <a class="nav-link" href="/service/">
                                             Service
                                         </a>
                                     </li>
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="/form/"> Predict
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/form/"
+                                            >Predict
                                         </a>
                                     </li>
                                 </ul>
@@ -100,59 +101,63 @@
             <!-- end header section -->
         </div>
 
-        <!-- contact section -->
-
-        <section class="contact_section layout_padding">
-            <div class="container">
-                <div class="heading_container">
-                    <h2>Submit your details and let us advise you in your financial journey!</h2>
-                    <img src="../static/images/plug.png" alt="" />
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form action="/form/" method = "post">
-                            <div>
-                                <input type="number" placeholder="Income" name = "income"/>
-                            </div>
-                            <div>
-                                <input type="number" placeholder="Investments" name = "investments" />
-                            </div>
-                            <div>
-                                <input type="number" placeholder="Desired retirement age" name = "retirementAge" />
-                            </div>
-                            <div>
-                              <input type="number" placeholder="Current age" name = "currentAge" />
-                          </div>
-                            <div>
-                                <select name = "lifestyle" id = "lifestyle">
-                                  <option value="" disabled selected>Financial Status</option>
-                                  <option value = "Budget"> Budget [$2000 monthly]</option>
-                                  <option value = "Standard"> Standard [$3000 monthly]</option>
-                                  <option value = "Lavish"> Lavish [$4000 monthly]</option>
-                                  
-
-                                </select>
-                            </div>
-                            <div class="d-flex">
-                                <input type = "submit">SEND</input>
-                            </div>
-                        </form>
+        <!-- about section -->
+        <section class="about_section layout_padding">
+      
+                <h1 class = "center">Results of your submission!</h1>
+                        
                     </div>
-                   
+                    <h2 class = "center"> You need to acquire ${{money}} by the time you retire. </h2>
+                    <p>
+                        {% for title, value in data.items() %}
+                        
+                        <div>
+                            <h2> Our suggestion! </h2>
+                            <p>You can consider investing ${{title[0] * increments}} into highly volatile stocks</p>
+                            <p>You can consider investing ${{title[1] * increments}} into slightly volatile stocks</p>
+                            <p>You can consider investing ${{title[2] * increments}} into highly stable stocks</p>
+                            <p> Your return with this strategy is ${{best_return}}</p>
+                            <p>Your percentage risk associated with this is {{value}}%</p>
+                            
+                        </div>
+                        {%endfor%}
+                        
+
+                        {% for title, value in risky.items() %}
+                        
+                        <div>
+                            <h2> Risky approach!</h2>
+                            <p>If you invest the whole amount into highly volatile stock, you can potentially have a net worth of ${{title}}</p>
+                            <p>However, that comes with a percentage risk of {{value}}% </p>
+                        </div>
+                        {%endfor%}
+
+                        {% for title, value in medium.items() %}
+                        
+                        <div>
+                            <h2> Moderate approach!</h2>
+                            <p>If you invest the whole amount into slightly volatile stock, you can potentially have a net worth of ${{title}}</p>
+                            <p>However, that comes with a percentage risk of {{value}}% </p>
+                        </div>
+                        {%endfor%}
+
+                        {% for title, value in low.items() %}
+                        
+                        <div>
+                            <h2> Safe approach!</h2>
+                            <p>If you invest the whole amount into stable stock, you can potentially have a net worth of ${{title}}</p>
+                            <p>That comes with a percentage risk of {{value}}% </p>
+                        </div>
+                        {%endfor%}
+                        
+                    </p>
+            
+                       
                 </div>
             </div>
         </section>
 
-        <!-- end contact section -->
-
-      
-        <!-- end info section -->
-
-        <!-- footer section -->
-        
-        <!-- footer section -->
+        <!-- end about section -->
 
         <script src="../static/js/jquery-3.4.1.min.js"></script>
         <script src="../static/js/bootstrap.js"></script>

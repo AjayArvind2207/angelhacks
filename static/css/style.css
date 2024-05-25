@@ -228,6 +228,13 @@ a:focus {
     color: #000000;
 }
 
+h1.center {
+    text-align: center;
+}
+
+h2.center {
+    text-align: center;
+}
 .slider_section h1 {
     color: #5941a9;
 }
