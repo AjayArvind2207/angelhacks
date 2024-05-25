@@ -104,52 +104,67 @@
         <!-- about section -->
         <section class="about_section layout_padding">
       
-                <h1 class = "center">Results of your submission!</h1>
-                        
-                    </div>
-                    <h2 class = "center"> You need to acquire ${{money}} by the time you retire. </h2>
-                    <p>
-                        {% for title, value in data.items() %}
-                        
-                        <div>
-                            <h2> Our suggestion! </h2>
-                            <p>You can consider investing ${{title[0] * increments}} into highly volatile stocks</p>
-                            <p>You can consider investing ${{title[1] * increments}} into slightly volatile stocks</p>
-                            <p>You can consider investing ${{title[2] * increments}} into highly stable stocks</p>
-                            <p> Your return with this strategy is ${{best_return}}</p>
-                            <p>Your percentage risk associated with this is {{value}}%</p>
+            <h1 class = "center">Results of your submission!</h1>
+                    
+                </div>
+                <h2 class = "center"> You need to acquire ${{money}} by the time you retire. </h2>
+                <p>
+                    
+                        {% if (0,0,0) in data%}
+
+                            <div>
+                                <h2> Sorry, your goals are not feasible. Consider a more reasonable target for your retirement!</h2>
+                                </div>
                             
-                        </div>
-                        {%endfor%}
                         
 
-                        {% for title, value in risky.items() %}
-                        
-                        <div>
-                            <h2> Risky approach!</h2>
-                            <p>If you invest the whole amount into highly volatile stock, you can potentially have a net worth of ${{title}}</p>
-                            <p>However, that comes with a percentage risk of {{value}}% </p>
-                        </div>
-                        {%endfor%}
+                        {%else%}
 
-                        {% for title, value in medium.items() %}
-                        
-                        <div>
-                            <h2> Moderate approach!</h2>
-                            <p>If you invest the whole amount into slightly volatile stock, you can potentially have a net worth of ${{title}}</p>
-                            <p>However, that comes with a percentage risk of {{value}}% </p>
-                        </div>
-                        {%endfor%}
+                            {% for title, value in data.items() %}
 
-                        {% for title, value in low.items() %}
-                        
-                        <div>
-                            <h2> Safe approach!</h2>
-                            <p>If you invest the whole amount into stable stock, you can potentially have a net worth of ${{title}}</p>
-                            <p>That comes with a percentage risk of {{value}}% </p>
-                        </div>
-                        {%endfor%}
-                        
+                                <div>
+                                    <h2> Our suggestion! </h2>
+                                    <p>You can consider investing ${{title[0] * increments}} into highly volatile stocks</p>
+                                    <p>You can consider investing ${{title[1] * increments}} into slightly volatile stocks</p>
+                                    <p>You can consider investing ${{title[2] * increments}} into highly stable stocks</p>
+                                    <p> Your return with this strategy is ${{best_return}}</p>
+                                    <p>Your percentage risk associated with this is {{value}}%</p>
+                                    
+                                </div>
+
+                            {%endfor%}
+
+                    
+
+                            {% for title, value in risky.items() %}
+                    
+                            <div>
+                                <h2> Risky approach!</h2>
+                                <p>If you invest the whole amount into highly volatile stock, you can potentially have a net worth of ${{title}}</p>
+                                <p>However, that comes with a percentage risk of {{value}}% </p>
+                            </div>
+                            {%endfor%}
+
+                            {% for title, value in medium.items() %}
+                            
+                            <div>
+                                <h2> Moderate approach!</h2>
+                                <p>If you invest the whole amount into slightly volatile stock, you can potentially have a net worth of ${{title}}</p>
+                                <p>However, that comes with a percentage risk of {{value}}% </p>
+                            </div>
+                            {%endfor%}
+
+                            {% for title, value in low.items() %}
+                            
+                            <div>
+                                <h2> Safe approach!</h2>
+                                <p>If you invest the whole amount into stable stock, you can potentially have a net worth of ${{title}}</p>
+                                <p>That comes with a percentage risk of {{value}}% </p>
+                            </div>
+                            {%endfor%}
+                        {%endif%}
+                    
+                
                     </p>
             
                        

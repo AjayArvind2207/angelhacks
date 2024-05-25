@@ -137,6 +137,8 @@ def get_form():
     percentage_risk_low = 0
 
     percentage_risk = min(100, min_volatility / net_worth * 50)
+
+
     data = {best_outcome: round(percentage_risk, 2)}
     risky = {int(max_outcome): round(percentage_risk_max,2)}
     medium = {int(max_medium_outcome): round(percentage_risk_medium,2)}
