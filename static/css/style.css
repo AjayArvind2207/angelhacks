@@ -79,7 +79,6 @@ body {
 .header_section .nav_container {
     margin: 0 auto;
 }
-
 .custom_nav-container .navbar-nav .nav-item .nav-link {
     padding: 7px 20px;
     margin: 10px 15px;
@@ -700,3 +699,14 @@ a:focus {
     color: #222222;
 }
 /*# sourceMappingURL=style.css.map */
+.contact_section .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.contact_section .row img {
+    max-width: 500px; /* Limit the image width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: rounded corners for the image */
+}
