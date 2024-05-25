@@ -42,6 +42,23 @@ def return_about():
 def return_service():
     return render_template('service.html')
 
+@app.route("/dashboard/", methods = ["GET"])
+def return_dashboard():
+    details = db.child(user['localId']).get()
+    details = dict(details.val())
+    optimal_dict = details['optimal']
+    current_key = next(iter(optimal_dict))  # Get the single key in 'optimal' dict
+
+# Convert the string key to a tuple
+    new_key = tuple(map(int, current_key.split('_')))
+
+# Replace the key in the 'optimal' dictionary
+    details['optimal'] = {new_key: optimal_dict[current_key]}
+    print(details)
+   
+
+    return render_template('dashboard.html', user= user, details = details)
+
 
 @app.route("/results/", methods = ["GET"])
 def return_results():
@@ -200,7 +217,7 @@ def get_form():
     email = session['user']
     print(user)
 
-    db.child(user['localId']).set({'optimal': data_db, 'risky': risky, 'medium': medium, 'low': low, "money" : money, "best_return" : best_return})
+    db.child(user['localId']).set({'optimal': data_db, 'increments': increments, 'risky': risky, 'medium': medium, 'low': low, "money" : money, "best_return" : best_return})
 
 
     

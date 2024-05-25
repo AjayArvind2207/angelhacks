@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Basic -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <!-- Site Metas -->
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>Electrochip</title>
+
+        <!-- slider stylesheet -->
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"
+        />
+
+        <!-- bootstrap core css -->
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../static/css/bootstrap.css"
+        />
+
+        <!-- fonts style -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Custom styles for this template -->
+        <link href="../static/css/style.css" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="../static/css/responsive.css" rel="stylesheet" />
+    </head>
+
+    <body class="sub_page" style="background-color: #f3f0f6">
+        <div class="hero_area">
+            <!-- header section strats -->
+            <header class="header_section">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg custom_nav-container">
+                        <a class="navbar-brand" href="/">
+                            <img src="../static/images/logo.png" alt="" />
+                            <span> Electrochip </span>
+                        </a>
+                        <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="s-1"> </span>
+                            <span class="s-2"> </span>
+                            <span class="s-3"> </span>
+                        </button>
+
+                        <div
+                            class="collapse navbar-collapse"
+                            id="navbarSupportedContent"
+                        >
+                            <div
+                                class="d-flex ml-auto flex-column flex-lg-row align-items-center"
+                            >
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/"
+                                            >Home
+                                            <span class="sr-only"
+                                                >(current)</span
+                                            ></a
+                                        >
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/form/"
+                                            >Predict
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/about/">
+                                            About</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <!-- end header section -->
+        </div>
+
+        <!-- about section -->
+        <div
+            style="
+                display: flex;
+                justify-content: center;
+                background-color: #f3f0f6;
+            "
+        >
+            <section class="result_section">
+                <h1 class="center">Dashboard:</h1>
+
+                {% for item, value in details['optimal'].items() %}
+                <p>Your email ID is: {{ user['email'] }}</p>
+                <p>Your retirement goal is to earn ${{ details['money'] }}</p>
+                <p>Your optimal investment strategy is to invest ${{item[0] * details['increments'] }} in highly volatile stocks, ${{ item[1] * details['increments'] }} in slightly volatile stocks, and ${{item[2] * details['increments'] }} in stable stocks.</p>
+                <p>This has a risk percentage of {{value}}%</p>
+                {%endfor%}
+
+                </section>
+        <script src="../static/js/jquery-3.4.1.min.js"></script>
+        <script src="../static/js/bootstrap.js"></script>
+    </body>
+</html>
