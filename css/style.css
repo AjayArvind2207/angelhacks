@@ -228,6 +228,9 @@ a:focus {
     color: #000000;
 }
 
+.slider_section h1 {
+  color: #5941A9;
+}
 .slider_section .detail_box h1 {
     text-transform: uppercase;
     font-weight: bold;
@@ -235,6 +238,10 @@ a:focus {
 
 .slider_section .detail_box p {
     margin-top: 20px;
+}
+.slider_section p {
+  color: black;
+  font-weight: 600;
 }
 
 .slider_section .detail_box a {
