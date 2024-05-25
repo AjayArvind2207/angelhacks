@@ -42,6 +42,9 @@
 }
 
 @media (max-width: 768px) {
+    .result_section {
+        border-style: none;
+    }
     .slider_section .detail_box {
         text-align: center;
     }

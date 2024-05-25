@@ -38,8 +38,16 @@ def return_about():
     return render_template('about.html', authed = 'user' in session)
 
 @app.route("/dashboard/", methods = ["GET"])
+
 def return_dashboard():
-    details = db.child(user['localId']).get()
+    print(session['user'])    
+    if 'user' not in session:
+        return render_template('index.html', authed = False)
+    
+    details = db.child(session['user']['localId']).get()
+    if details.val() == None:
+        return render_template('dashboard.html', user = session['user'], details = None, not_predicted = True)
+    print(details.val())
     details = dict(details.val())
     optimal_dict = details['optimal']
     current_key = next(iter(optimal_dict))  # Get the single key in 'optimal' dict
@@ -52,7 +60,7 @@ def return_dashboard():
     print(details)
    
 
-    return render_template('dashboard.html', user= user, details = details)
+    return render_template('dashboard.html', user= session['user'], details = details, not_predicted = False)
 
 
 @app.route("/results/", methods = ["GET"])
@@ -68,17 +76,29 @@ def login():
         password = request.form.get('password')
     
         try:
-            global user
             user = auth.sign_in_with_email_and_password(email, password)
-            session['user'] = email
-            return render_template('index.html', authed = 'user' in session)
+            session['user'] = user
+            details = db.child(session['user']['localId']).get()
+            if details.val() == None:
+                return render_template('dashboard.html', user = session['user'], details = None, not_predicted = True)
+            print(details.val())
+            details = dict(details.val())
+            optimal_dict = details['optimal']
+            current_key = next(iter(optimal_dict))  # Get the single key in 'optimal' dict
+
+        # Convert the string key to a tuple
+            new_key = tuple(map(int, current_key.split('_')))
+
+        # Replace the key in the 'optimal' dictionary
+            details['optimal'] = {new_key: optimal_dict[current_key]}
+            return render_template('dashboard.html', user= session['user'], details = details, not_predicted = False)
         except:
             return "Failed to login"
     return render_template('login.html', authed = 'user' in session)
 
 
-@app.route("/signin/", methods = ['GET','POST'])
-def signin():
+@app.route("/register/", methods = ['GET','POST'])
+def register():
     
     if request.method == 'POST':
         email = request.form.get('email')
@@ -88,13 +108,17 @@ def signin():
             return "Failed to register: Password and confirmation are different."
 
         try:
-            global user
+            print(email,password)
             user = auth.create_user_with_email_and_password(email, password)
-            session['user'] = email
-            return render_template('index.html', authed = 'user' in session)
-        except:
+            print("Hello!")
+            session['user'] = user
+            print("Here")
+            return render_template('dashboard.html', not_predicted = True, details = None)
+        
+        except Exception as e:
+            print(e)
             return "Failed to Register"
-    return render_template('signin.html', authed = 'user' in session)
+    return render_template('register.html', authed = 'user' in session)
 
                                                                                                                                                                                                                                                                                                                                                              
 
@@ -129,7 +153,7 @@ def get_form():
         lifestyle_amount = 4000
 
 
-    lifeExpectancy = 75
+    lifeExpectancy = 90
     
     delta_age = lifeExpectancy - retirementAge
     
@@ -212,8 +236,7 @@ def get_form():
 
     concat_data = '_'.join(map(str, best_outcome))
     data_db = {concat_data: round(percentage_risk, 2)}
-    email = session['user']
-    print(user)
+    user = session['user']
 
     db.child(user['localId']).set({'optimal': data_db, 'increments': increments, 'risky': risky, 'medium': medium, 'low': low, "money" : money, "best_return" : best_return})
 
