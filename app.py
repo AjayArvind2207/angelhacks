@@ -28,19 +28,20 @@ CORS(app)
 
 @app.route("/", methods=["GET"])
 def return_home():
-    return render_template('index.html')
+    return render_template('index.html', authed = 'user' in session)
 
 @app.route("/form/", methods = ["GET"])
 def return_form():
-    return render_template('predict.html')
+    return render_template('predict.html', authed = 'user' in session)
+
+@app.route("/logout/", methods = ["GET"])
+def logout():
+    session.pop('user', None)
+    return render_template('index.html', authed = 'user' in session)# should be false)
 
 @app.route("/about/", methods = ["GET"])
 def return_about():
-    return render_template('about.html')
-
-@app.route("/service/", methods = ["GET"])
-def return_service():
-    return render_template('service.html')
+    return render_template('about.html', authed = 'user' in session)
 
 @app.route("/dashboard/", methods = ["GET"])
 def return_dashboard():
@@ -67,17 +68,17 @@ def return_results():
 @app.route("/login/", methods = ['GET','POST'])
 def login():
     if 'user' in session:
-        return render_template('index.html')
+        return render_template('index.html', authed = True)
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         try:
             user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = email
-            return render_template('index.html')
+            return render_template('index.html', authed = 'user' in session)
         except:
             return "Failed to login"
-    return render_template('login.html')
+    return render_template('login.html', authed = 'user' in session)
 
 
 @app.route("/signin/", methods = ['GET','POST'])
@@ -93,10 +94,10 @@ def signin():
         try:
             new_user = auth.create_user_with_email_and_password(email, password)
             session['user'] = email
-            return render_template('index.html')
+            return render_template('index.html', authed = 'user' in session)
         except:
             return "Failed to Register"
-    return render_template('signin.html')
+    return render_template('signin.html', authed = 'user' in session)
 
                                                                                                                                                                                                                                                                                                                                                              
 
@@ -223,7 +224,7 @@ def get_form():
     
 
     #Do something with it, and render our results template and give it the values we compute. Also update the dashboard [when needbe]
-    return render_template('results.html', data = data, increments = increments, risky = risky, medium = medium, low = low, money = money, best_return = best_return)
+    return render_template('results.html', data = data, increments = increments, risky = risky, medium = medium, low = low, money = money, best_return = best_return, authed = 'user' in session)
 
 def compute_amount(interest_rate, principal, delta):
     
