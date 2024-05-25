@@ -130,7 +130,7 @@
                 <h1 class="center">Dashboard:</h1>
 
                 {% for item, value in details['optimal'].items() %}
-                <p>Your email ID is: {{ user['email'] }}</p>
+                <p>Welcome back to Ajay's Goose!</p>
                 <p>Your retirement goal is to earn ${{ details['money'] }}</p>
                 <p>Your optimal investment strategy is to invest ${{item[0] * details['increments'] }} in highly volatile stocks, ${{ item[1] * details['increments'] }} in slightly volatile stocks, and ${{item[2] * details['increments'] }} in stable stocks.</p>
                 <p>This has a risk percentage of {{value}}%</p>
