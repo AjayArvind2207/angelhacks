@@ -494,10 +494,11 @@ h2.center {
 
 .contact_section {
     position: relative;
+    background-color: #f3f0f6;
 }
 
 .contact_section form {
-    margin-top: 45px;
+    margin-top: 30px;
     padding-right: 35px;
 }
 
@@ -720,4 +721,58 @@ h2.center {
     max-width: 500px; /* Limit the image width */
     height: auto; /* Maintain aspect ratio */
     border-radius: 8px; /* Optional: rounded corners for the image */
+}
+
+.result_section {
+    margin-top: 30px;
+    border-radius: 20px;
+    border: 1px solid #000000;
+    padding: 20px;
+    background-color: #f3f0f6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 300px; /* Set a minimum width to prevent content from becoming too compressed */
+    max-width: 800px;
+}
+
+.center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.result_logic > div {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #ffffff; /* White background for individual result blocks */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.result_logic h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333333; /* Dark gray for better readability */
+}
+
+.result_logic p {
+    margin: 10px 0;
+    font-size: 1em;
+    color: #555555; /* Medium gray for a softer text color */
+}
+
+@media (max-width: 600px) {
+    .result_section {
+        padding: 15px;
+    }
+
+    .result_logic > div {
+        padding: 10px;
+    }
+
+    .result_logic h2 {
+        font-size: 1.2em;
+    }
+
+    .result_logic p {
+        font-size: 0.9em;
+    }
 }
