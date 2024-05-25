@@ -3,22 +3,15 @@ from flask import Flask, render_template, make_response, send_from_directory, re
 from flask_cors import CORS
 import pyrebase
 import logging
+import json
 
 # Sets up the Flask application
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'Secret Key 123'
-config = {
-    "apiKey": "AIzaSyBFLIMU7zJjRiHkC07gamC-mRNdSN6XpM0",
-    "authDomain" : "angelhacks-9136d.firebaseapp.com",
-    "databaseURL": "https://angelhacks-9136d-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "projectId": "angelhacks-9136d",
-    "storageBucket": "angelhacks-9136d.appspot.com",
-    "messagingSenderId": "324896203579",
-    "appId": "1:324896203579:web:a8736c2c43d986d40a0d1e",
-    "measurementId": "G-T9SZBTP6XV"
-
-}
+with open ('credentials.json') as f:
+    config = json.load(f)
 firebase = pyrebase.initialize_app(config)
+db = firebase.database()
 auth = firebase.auth()
 
 email = "test@gmail.com"
@@ -69,6 +62,26 @@ def login():
             return "Failed to login"
     return render_template('login.html')
 
+
+@app.route("/signin/", methods = ['GET','POST'])
+def signin():
+    
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirmPassword')
+        if password != confirm_password:
+            return "Failed to register: Password and confirmation are different."
+
+        try:
+            new_user = auth.create_user_with_email_and_password(email, password)
+            session['user'] = email
+            return render_template('index.html')
+        except:
+            return "Failed to Register"
+    return render_template('signin.html')
+
+                                                                                                                                                                                                                                                                                                                                                             
 
 @app.route('/form/', methods = ["POST"])
 def get_form():
@@ -182,8 +195,15 @@ def get_form():
     money = required_amount_of_money
 
 
+    concat_data = '_'.join(map(str, best_outcome))
+    data_db = {concat_data: round(percentage_risk, 2)}
+    email = session['user']
+    print(user)
 
-   
+    db.child(user['localId']).set({'optimal': data_db, 'risky': risky, 'medium': medium, 'low': low, "money" : money, "best_return" : best_return})
+
+
+    
 
     #Do something with it, and render our results template and give it the values we compute. Also update the dashboard [when needbe]
     return render_template('results.html', data = data, increments = increments, risky = risky, medium = medium, low = low, money = money, best_return = best_return)
