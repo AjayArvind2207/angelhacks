@@ -1,13 +1,34 @@
 from pathlib import Path
-from flask import Flask, render_template, make_response, send_from_directory, request
+from flask import Flask, render_template, make_response, send_from_directory, request, session
 from flask_cors import CORS
-
+import pyrebase
 import logging
 
 # Sets up the Flask application
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'Secret Key 123'
-tasks_data = {}
+config = {
+    "apiKey": "AIzaSyBFLIMU7zJjRiHkC07gamC-mRNdSN6XpM0",
+    "authDomain" : "angelhacks-9136d.firebaseapp.com",
+    "databaseURL": "https://angelhacks-9136d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "projectId": "angelhacks-9136d",
+    "storageBucket": "angelhacks-9136d.appspot.com",
+    "messagingSenderId": "324896203579",
+    "appId": "1:324896203579:web:a8736c2c43d986d40a0d1e",
+    "measurementId": "G-T9SZBTP6XV"
+
+}
+firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
+
+email = "test@gmail.com"
+password = "123456"
+
+user = auth.sign_in_with_email_and_password(email, password)
+info = auth.get_account_info(user['idToken'])
+print(info)
+print(user)
+
 CORS(app)
 
 
@@ -32,6 +53,21 @@ def return_service():
 @app.route("/results/", methods = ["GET"])
 def return_results():
     return render_template('results.html')
+
+@app.route("/login/", methods = ['GET','POST'])
+def login():
+    if 'user' in session:
+        return render_template('index.html')
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        try:
+            user = auth.sign_in_with_email_and_password(email, password)
+            session['user'] = email
+            return render_template('index.html')
+        except:
+            return "Failed to login"
+    return render_template('login.html')
 
 
 @app.route('/form/', methods = ["POST"])
