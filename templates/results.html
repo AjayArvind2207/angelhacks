@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Basic -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <!-- Site Metas -->
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>Electrochip</title>
+
+        <!-- slider stylesheet -->
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"
+        />
+
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+
+        <!-- fonts style -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Custom styles for this template -->
+        <link href="../static/css/style.css" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="../static/css/responsive.css" rel="stylesheet" />
+    </head>
+
+    <body class="sub_page">
+        <div class="hero_area">
+            <!-- header section strats -->
+            <header class="header_section">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg custom_nav-container">
+                        <a class="navbar-brand" href="/">
+                            <img src="../static/images/logo.png" alt="" />
+                            <span> Electrochip </span>
+                        </a>
+                        <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="s-1"> </span>
+                            <span class="s-2"> </span>
+                            <span class="s-3"> </span>
+                        </button>
+
+                        <div
+                            class="collapse navbar-collapse"
+                            id="navbarSupportedContent"
+                        >
+                            <div
+                                class="d-flex ml-auto flex-column flex-lg-row align-items-center"
+                            >
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/"
+                                            >Home
+                                            <span class="sr-only"
+                                                >(current)</span
+                                            ></a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/about/">
+                                            About</a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/service/">
+                                            Service
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/form/"
+                                            >Predict
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <!-- end header section -->
+        </div>
+
+        <!-- about section -->
+        <section class="about_section layout_padding">
+      
+                <h1 class = "center">Results of your submission!</h1>
+                        
+                    </div>
+                    <h2 class = "center"> You need to acquire ${{money}} by the time you retire. </h2>
+                    <p>
+                        {% for title, value in data.items() %}
+                        
+                        <div>
+                            <h2> Our suggestion! </h2>
+                            <p>You can consider investing ${{title[0] * increments}} into highly volatile stocks</p>
+                            <p>You can consider investing ${{title[1] * increments}} into slightly volatile stocks</p>
+                            <p>You can consider investing ${{title[2] * increments}} into highly stable stocks</p>
+                            <p> Your return with this strategy is ${{best_return}}</p>
+                            <p>Your percentage risk associated with this is {{value}}%</p>
+                            
+                        </div>
+                        {%endfor%}
+                        
+
+                        {% for title, value in risky.items() %}
+                        
+                        <div>
+                            <h2> Risky approach!</h2>
+                            <p>If you invest the whole amount into highly volatile stock, you can potentially have a net worth of ${{title}}</p>
+                            <p>However, that comes with a percentage risk of {{value}}% </p>
+                        </div>
+                        {%endfor%}
+
+                        {% for title, value in medium.items() %}
+                        
+                        <div>
+                            <h2> Moderate approach!</h2>
+                            <p>If you invest the whole amount into slightly volatile stock, you can potentially have a net worth of ${{title}}</p>
+                            <p>However, that comes with a percentage risk of {{value}}% </p>
+                        </div>
+                        {%endfor%}
+
+                        {% for title, value in low.items() %}
+                        
+                        <div>
+                            <h2> Safe approach!</h2>
+                            <p>If you invest the whole amount into stable stock, you can potentially have a net worth of ${{title}}</p>
+                            <p>That comes with a percentage risk of {{value}}% </p>
+                        </div>
+                        {%endfor%}
+                        
+                    </p>
+            
+                       
+                </div>
+            </div>
+        </section>
+
+        <!-- end about section -->
+
+        <script src="../static/js/jquery-3.4.1.min.js"></script>
+        <script src="../static/js/bootstrap.js"></script>
+    </body>
+</html>
