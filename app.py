@@ -14,13 +14,7 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 auth = firebase.auth()
 
-email = "test@gmail.com"
-password = "123456"
 
-user = auth.sign_in_with_email_and_password(email, password)
-info = auth.get_account_info(user['idToken'])
-print(info)
-print(user)
 
 CORS(app)
 
@@ -72,7 +66,9 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+    
         try:
+            global user
             user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = email
             return render_template('index.html', authed = 'user' in session)
@@ -92,7 +88,8 @@ def signin():
             return "Failed to register: Password and confirmation are different."
 
         try:
-            new_user = auth.create_user_with_email_and_password(email, password)
+            global user
+            user = auth.create_user_with_email_and_password(email, password)
             session['user'] = email
             return render_template('index.html', authed = 'user' in session)
         except:
