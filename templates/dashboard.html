@@ -14,7 +14,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-        <title>Electrochip</title>
+        <title>Golden Compass</title>
 
         <!-- slider stylesheet -->
         <link
@@ -48,8 +48,8 @@
                 <div class="container">
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="/">
-                            <img src="../static/images/logo.png" alt="" />
-                            <span> Electrochip </span>
+                            <img src="../static/images/logo.webp" alt="" width="70px" height="70px"/>
+                            <span> Golden Compass</span>
                         </a>
                         <button
                             class="navbar-toggler"
@@ -74,7 +74,7 @@
                             >
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="/"
+                                        <a class="nav-link" href="/dashboard/"
                                             >Dashboard
                                             <span class="sr-only"
                                                 >(current)</span
@@ -127,12 +127,13 @@
                 </section>  
         {%else%}
             <section class="result_section">
-                <h1 class="center">Dashboard:</h1>
+                <h1 class="center" style="font-weight: bold;">Dashboard</h1>
 
                 {% for item, value in details['optimal'].items() %}
-                <p>Welcome back to Ajay's Goose!</p>
+                <p>Welcome back to Golden Compass!</p>
                 <p>Your retirement goal is to earn ${{ details['money'] }}</p>
-                <p>Your optimal investment strategy is to invest ${{item[0] * details['increments'] }} in highly volatile stocks, ${{ item[1] * details['increments'] }} in slightly volatile stocks, and ${{item[2] * details['increments'] }} in stable stocks.</p>
+                <p>Your optimal investment strategy is to invest ${{item[0] * details['increments'] }} in highly volatile stocks</p>
+                <p>${{ item[1] * details['increments'] }} in slightly volatile stocks, and ${{item[2] * details['increments'] }} in stable stocks.</p>
                 <p>This has a risk percentage of {{value}}%</p>
                 {%endfor%}
 

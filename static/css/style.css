@@ -142,13 +142,15 @@ a:focus {
 
 .navbar-brand img {
     margin-right: 5px;
-    width: 35px;
+    width: 70px;
+    height: auto;
 }
 
 .navbar-brand span {
     font-size: 22px;
-    font-weight: 700;
-    color: #4b208c;
+    font-weight: 550;
+    color: rgb(197, 168, 5);
+    text-shadow: #000000;
 }
 
 .custom_nav-container {
