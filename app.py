@@ -4,12 +4,20 @@ from flask_cors import CORS
 import pyrebase
 import logging
 import json
+import os
 
 # Sets up the Flask application
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'Secret Key 123'
-with open ('credentials.json') as f:
-    config = json.load(f)
+apiKey = os.environ.get("apiKey")
+appId = os.environ.get("appId")
+databaseURL = os.environ.get("databaseURL")
+measurementId = os.environ.get("measurementId")
+messagingSenderId = os.environ.get("messagingSenderId")
+projectId = os.environ.get("projectId")
+storageBucket = os.environ.get("storageBucket")
+
+config = {'apiKey':apiKey, 'appId': appId, 'databaseURL':databaseURL, "measurementId":measurementId, "projectId":projectId, "storageBucket" : storageBucket}
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 auth = firebase.auth()
