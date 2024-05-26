@@ -31,7 +31,7 @@ def return_form():
 @app.route("/logout/", methods = ["GET"])
 def logout():
     session.pop('user', None)
-    return render_template('index.html', authed = 'user' in session)# should be false)
+    return render_template('index.html', authed = False)# should be false)
 
 @app.route("/about/", methods = ["GET"])
 def return_about():
