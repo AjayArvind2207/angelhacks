@@ -16,8 +16,9 @@ measurementId = os.environ.get("measurementId")
 messagingSenderId = os.environ.get("messagingSenderId")
 projectId = os.environ.get("projectId")
 storageBucket = os.environ.get("storageBucket")
+authDomain = os.environ.get("authDomain")
 
-config = {'apiKey':apiKey, 'appId': appId, 'databaseURL':databaseURL, "measurementId":measurementId, "projectId":projectId, "storageBucket" : storageBucket}
+config = {'apiKey':apiKey, 'appId': appId, 'databaseURL':databaseURL, "measurementId":measurementId, "projectId":projectId, "storageBucket" : storageBucket, "authDomain" : authDomain}
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 auth = firebase.auth()
